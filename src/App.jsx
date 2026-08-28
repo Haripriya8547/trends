@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 //
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetails from "./assets/pages/ProductDetails"
+import Login from "./assets/components/Login"
 function App() {
   const products = [
     {
@@ -45,8 +46,12 @@ function App() {
           <Route path="/products" element={<Cards1 products={products} />} />        
           <Route path="/About" element={<About/> } />
           <Route  path="/product/:id" element={<ProductDetails products={products}/>}/>
+           <Route  path="/login"  element={<Login />}                  
+        />
         </Routes>
+       
       </BrowserRouter>   
+      
       <Footer />
     </>
   )

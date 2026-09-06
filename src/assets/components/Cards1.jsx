@@ -3,22 +3,13 @@ import "./Cards1.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function Cards1({ products }) {
-
-    const [cartCount, setCartCount] = useState(0);
-    // const handleCartCountIncrement = () => {
-    //     console.log("Inside handleCartCountIncrement--------->");
-    // };
-    function handleCartCountIncrement() {
-        // cartCount++; 
-        setCartCount(cartCount + 1);
-    }
-    console.log("cartCount-------->", cartCount);
+function Cards1({ products , handleCartCountIncrement}) {
 
     return (
         <Container className="mt-3">
             <Row>
                 {products.map((product, i) => (
+                   
                     <Col
                         sm={12}
                         md={6}
@@ -29,7 +20,7 @@ function Cards1({ products }) {
                     >
                         <Card className="product-card">
 
-                            <h2>Count: {cartCount}</h2>
+                            
 
                             <Link to={`/product/${product.id}`}>
                                 <Image src={product.productImage} />

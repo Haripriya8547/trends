@@ -3,24 +3,43 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
   const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
 
   const [loginData, setLogindata] = useState({
     email: "",
     password: "",
   });
+  const { users } = useSelector((state) => state.userState);
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
+      
       event.stopPropagation();
+      setValidated(true);
+      return;
     }
 
-    setValidated(true);
+    const user = users.find((u) => u.email === loginData.email);
+
+    if (!user) {
+      toast.error("Invalid credentials");
+      return;
+    }
+    if (user.password !== loginData.password) {
+      toast.error("Invalid password");
+      return;
+    }
+
+    toast.success("User logged successfully");
+    navigate("/");
   };
 
   const handleChange = (event) => {

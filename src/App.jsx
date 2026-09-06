@@ -10,7 +10,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetails from "./assets/pages/ProductDetails"
 import Login from "./assets/components/Login"
+import Register from "./assets/components/Register"
+import { useState } from "react"
+import AddProduct from "./admin/pages/AddProduct";
+import { ToastContainer } from "react-toastify"
+
 function App() {
+ const [cartCount, setCartCount] = useState(0);
+    function handleCartCountIncrement() {
+    
+        setCartCount(cartCount + 1);
+    }
   const products = [
     {
       id: 1,
@@ -40,16 +50,17 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        <Header cartCount={cartCount} />
+        <ToastContainer position="top-center" autoClose={1500}/>
         <Routes>
           <Route path="/" element={<HomeCarousel />} />       
-          <Route path="/products" element={<Cards1 products={products} />} />        
+          <Route path="/products" element={< Cards1 handleCartCountIncrement={handleCartCountIncrement} products={products} />} />        
           <Route path="/About" element={<About/> } />
           <Route  path="/product/:id" element={<ProductDetails products={products}/>}/>
-           <Route  path="/login"  element={<Login />}                  
-        />
-        </Routes>
-       
+           <Route  path="/login"  element={<Login />}  />
+           <Route path="/register" element={<Register/>}  /> 
+          <Route path="/admin/add-product" element={<AddProduct />} />                  
+        </Routes>       
       </BrowserRouter>   
       
       <Footer />

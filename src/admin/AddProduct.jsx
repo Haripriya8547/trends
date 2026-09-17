@@ -93,6 +93,23 @@ function AddProduct() {
                                 </Row>
                                 <Row className=" mb-3">
                                     <Form.Group as={Col} controlId="validationCustom05">
+                                        <Form.Label>product Photo</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="productPhoto"
+                                            name="productPhoto"
+                                            onChange={handleChange}
+                                            value={values.productPhoto}
+                                            isValid={touched.productPhoto && !errors.productPhoto}
+                                            isInvalid={touched.productPhoto && !!errors.productPhoto}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.productPhoto}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Row>
+                                 <Row className=" mb-3">
+                                    <Form.Group as={Col} controlId="validationCustom05">
                                         <Form.Label>product Discription</Form.Label>
                                         <Form.Control
                                             type="productDiscription"

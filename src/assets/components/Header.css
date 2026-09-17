@@ -9,3 +9,35 @@
         
     }
     
+ 
+.profile-dropdown .profile-toggle {
+    background-color: transparent !important;
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    padding: 5px 10px !important;
+}
+
+
+.profile-dropdown .profile-toggle svg {
+    color: black !important;
+    fill: black !important;
+}
+
+
+.profile-dropdown .profile-toggle:hover,
+.profile-dropdown .profile-toggle:focus,
+.profile-dropdown .profile-toggle:active,
+.profile-dropdown.show .profile-toggle {
+    background-color: transparent !important;
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+.profile-dropdown .profile-toggle::after {
+    color: black !important;
+    border-top-color: black !important;
+}

@@ -7,14 +7,16 @@ import { IoBag } from 'react-icons/io5';
 import "./Header.css"
 import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { userLogout } from '../../redux/userSlice';
 
 function Header({ cartCount }) {
 
+
+  const { isAuthenticated } = useSelector((state) => state.userState);
   const dispatch = useDispatch();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(userLogout());
@@ -36,33 +38,66 @@ function Header({ cartCount }) {
           </Nav>
 
           <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/login">Log In</Nav.Link>
+            {!isAuthenticated && (
+              <Nav.Link as={Link} to="/login">Log In</Nav.Link>
+            )}
+
             <Nav.Link as={Link} to="/cart">
               <IoBag size={20} />
               <span>
                 {cartCount}
               </span>
             </Nav.Link>
-            <Nav.Link as={Link} to="/profile">
-              <FaUserAlt size={20} />
-            </Nav.Link>
+
+
 
 
           </Nav>
         </Navbar.Collapse>
-        <Dropdown>
-          <Dropdown.Toggle >
-            admin
-          </Dropdown.Toggle>
+        {isAuthenticated && (
+          <Dropdown className="profile-dropdown">
+            <Dropdown.Toggle
+              variant="light"
+              className="profile-toggle"
+              id="profile-dropdown"
+            >
+              <FaUserAlt size={20} />
+            </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="/admin/add-product">
-              Add product
-            </Dropdown.Item>
-            <Dropdown.Item as={Link} to="/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item as={Link} onClick={handleLogout} to="/login">log out</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to="/profile">
+                Profile
+              </Dropdown.Item>
+
+              <Dropdown.Item as={Link} to="/admin/add-product">
+                Add product
+              </Dropdown.Item>
+
+              <Dropdown.Item as={Link} to="/admin/list-product">
+                List Product
+              </Dropdown.Item>
+
+              <Dropdown.Item as={Link} to="/admin/list-users">
+                List user
+              </Dropdown.Item>
+
+              <Dropdown.Item as={Link} to="/register">
+                Register
+              </Dropdown.Item>
+
+              <Dropdown.Item
+                as={Link}
+                to="/login"
+                onClick={handleLogout}
+              >
+                Log out
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        )}
+
+
+
       </Container>
     </Navbar>
   );

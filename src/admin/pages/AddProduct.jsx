@@ -1,131 +1,192 @@
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { Link, useNavigate } from "react-router-dom";
-import * as formik from 'formik';
-import * as yup from 'yup';
+import * as formik from "formik";
+import * as yup from "yup";
 import { Container } from "react-bootstrap";
-import { userRegister } from "../../redux/userSlice";
+import { addProduct } from "../../redux/productSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
-
 function AddProduct() {
     const { Formik } = formik;
+
     const dispatch = useDispatch();
-    const Navigate= useNavigate();
+    const navigate = useNavigate();
 
     const schema = yup.object().shape({
-        productName: yup.string().required("please enter productName"),
-        productpPrice: yup.number().required("please enter productPrice"),
-        productDescription: yup.string().required("please enter productDescription"),
-         productPhoto: yup.string().required("please add product photo"),
+        productName: yup
+            .string()
+            .required("Please enter product name"),
 
+        productPrice: yup
+            .number()
+            .required("Please enter product price"),
+
+        productDescription: yup
+            .string()
+            .required("Please enter product description"),
+
+        productPhoto: yup
+            .string()
+            .required("Please add product photo"),
     });
-    const handleRegister = (values) => {
-        values.id = Date.now();
-        values.role = "user";
-        values.status = true;
-        // console.log("values----->",values);        
-       dispatch( userRegister(values));
-        toast('product added successfuly');
-        Navigate();
 
-    }
+    const handleAddProduct = (values) => {
+        const product = {
+            ...values,
+            id: Date.now(),
+        };
 
+        dispatch(addProduct(product));
 
+        toast.success("Product added successfully!");
+
+        navigate("/admin/list-product");
+    };
 
     return (
         <Container>
-            <Row >
+            <Row>
                 <Col>
                     <h2>Add Product</h2>
                 </Col>
             </Row>
+
             <Row md={4} className="m-3 justify-content-center">
                 <Col>
                     <Formik
                         validationSchema={schema}
-                        onSubmit={handleRegister}
+                        onSubmit={handleAddProduct}
                         initialValues={{
-                            productName: '',
-                            productPrice: '',
-                            productDescription: '',
-                            productPhoto:''
-
+                            productName: "",
+                            productPrice: "",
+                            productDescription: "",
+                            productPhoto: "",
                         }}
                     >
-                        {({ handleSubmit, handleChange, values, touched, errors }) => (
+                        {({
+                            handleSubmit,
+                            handleChange,
+                            values,
+                            touched,
+                            errors,
+                        }) => (
                             <Form noValidate onSubmit={handleSubmit}>
-                                <Row className="mt-2 mb-2">
-                                    <Form.Group as={Col} controlId="validationCustom01">
-                                        <Form.Label>Product Name</Form.Label>
-                                        <Form.Control
 
-                                            type="Text"
+                                {/* Product Name */}
+                                <Row className="mt-2 mb-2">
+                                    <Form.Group as={Col}>
+                                        <Form.Label>
+                                            Product Name
+                                        </Form.Label>
+
+                                        <Form.Control
+                                            type="text"
                                             placeholder="Product Name"
                                             name="productName"
                                             onChange={handleChange}
-                                            value={values.fullname}
-                                            isValid={touched.ProductName && !errors.ProductName}
-                                            isInvalid={touched.ProductName && !!errors.ProductName}
+                                            value={values.productName}
+                                            isValid={
+                                                touched.productName &&
+                                                !errors.productName
+                                            }
+                                            isInvalid={
+                                                touched.productName &&
+                                                !!errors.productName
+                                            }
                                         />
+
                                         <Form.Control.Feedback type="invalid">
-                                            {errors.ProductName}
+                                            {errors.productName}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
-                                <Row className="mt-2 mb-3">
-                                    <Form.Group as={Col} controlId="validationCustom01">
-                                        <Form.Label>Product Price</Form.Label>
-                                        <Form.Control
 
+                                {/* Product Price */}
+                                <Row className="mt-2 mb-3">
+                                    <Form.Group as={Col}>
+                                        <Form.Label>
+                                            Product Price
+                                        </Form.Label>
+
+                                        <Form.Control
                                             type="number"
                                             placeholder="Product Price"
                                             name="productPrice"
                                             onChange={handleChange}
                                             value={values.productPrice}
-                                            isValid={touched.productPrice && !errors.productPrice}
-                                            isInvalid={touched.productPrice && !!errors.productPrice}
+                                            isValid={
+                                                touched.productPrice &&
+                                                !errors.productPrice
+                                            }
+                                            isInvalid={
+                                                touched.productPrice &&
+                                                !!errors.productPrice
+                                            }
                                         />
+
                                         <Form.Control.Feedback type="invalid">
                                             {errors.productPrice}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
-                                <Row className=" mb-3">
-                                    <Form.Group as={Col} controlId="validationCustom05">
-                                        <Form.Label> product Description</Form.Label>
+
+                                {/* Product Description */}
+                                <Row className="mb-3">
+                                    <Form.Group as={Col}>
+                                        <Form.Label>
+                                            Product Description
+                                        </Form.Label>
+
                                         <Form.Control
                                             as="textarea"
                                             rows={5}
-                                            placeholder=" product Description"
+                                            placeholder="Product Description"
                                             name="productDescription"
                                             onChange={handleChange}
                                             value={values.productDescription}
-                                            isValid={touched.productDescription && !errors.productDescription}
-                                            isInvalid={touched.productDescription && !!errors.productDescription}
+                                            isValid={
+                                                touched.productDescription &&
+                                                !errors.productDescription
+                                            }
+                                            isInvalid={
+                                                touched.productDescription &&
+                                                !!errors.productDescription
+                                            }
                                         />
+
                                         <Form.Control.Feedback type="invalid">
                                             {errors.productDescription}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
 
-                                 <Row className=" mb-3">
-                                    <Form.Group as={Col} controlId="validationCustom05">
-                                        <Form.Label>product Photo</Form.Label>
+                                {/* Product Photo */}
+                                <Row className="mb-3">
+                                    <Form.Group as={Col}>
+                                        <Form.Label>
+                                            Product Photo
+                                        </Form.Label>
+
                                         <Form.Control
-                                            type="productphoto"
-                                            placeholder="product Photo"
+                                            type="text"
+                                            placeholder="Enter product image URL"
                                             name="productPhoto"
                                             onChange={handleChange}
                                             value={values.productPhoto}
-                                            isValid={touched.productPhoto && !errors.productPhoto}
-                                            isInvalid={touched.productPhoto && !!errors.productPhoto}
+                                            isValid={
+                                                touched.productPhoto &&
+                                                !errors.productPhoto
+                                            }
+                                            isInvalid={
+                                                touched.productPhoto &&
+                                                !!errors.productPhoto
+                                            }
                                         />
+
                                         <Form.Control.Feedback type="invalid">
                                             {errors.productPhoto}
                                         </Form.Control.Feedback>
@@ -133,19 +194,19 @@ function AddProduct() {
                                 </Row>
 
                                 <div>
-                                    <Button type="submit" variant="success">
-                                        Add product
+                                    <Button
+                                        type="submit"
+                                        variant="success"
+                                    >
+                                        Add Product
                                     </Button>
                                 </div>
-                                <Link to="/login"> Already have an account? Login here! </Link>
+
                             </Form>
                         )}
-
                     </Formik>
                 </Col>
             </Row>
-
-
         </Container>
     );
 }

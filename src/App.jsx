@@ -25,6 +25,7 @@ import UnAuthorized from "./assets/components/unAuthorized";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cart from "./admin/pages/Cart";
 
 
 function App() {
@@ -84,7 +85,7 @@ function App() {
 
             <Routes>
 
-            
+
 
                 <Route
                     path="/"
@@ -92,7 +93,7 @@ function App() {
                 />
 
 
-   
+
 
                 <Route
                     path="/products"
@@ -107,7 +108,7 @@ function App() {
                 />
 
 
-           
+
 
                 <Route
                     path="/about"
@@ -115,7 +116,7 @@ function App() {
                 />
 
 
-      
+
 
                 <Route
                     path="/profile"
@@ -133,7 +134,7 @@ function App() {
                 />
 
 
-       
+
 
                 <Route
                     path="/login"
@@ -147,7 +148,7 @@ function App() {
                 />
 
 
-            
+
 
                 <Route
                     path="/unauthorized"
@@ -175,7 +176,7 @@ function App() {
                     path="/admin/list-product"
                     element={
                         <Auth
-                            requiredRole={["admin", "seller"]}
+                            requiredRole={["admin", "seller","user"]}
                         >
                             <ListProduct />
                         </Auth>
@@ -192,19 +193,20 @@ function App() {
                 />
 
 
-        
+
 
                 <Route
                     path="/admin/list-users"
                     element={
                         <Auth
-                            requiredRole={["admin"]}
+                            requiredRole={["admin","user","seller"]}
                         >
                             <ListUsers />
                         </Auth>
                     }
                 />
-
+                <Route path="/cart"
+                    element={<Cart />} />
             </Routes>
 
             <Footer />

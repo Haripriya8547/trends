@@ -1,0 +1,144 @@
+
+/* Main layout */
+.product-details-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 30px;
+
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* Image container */
+.product-image-container {
+    width: 35%;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+/* Product image */
+.product-details-image {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    padding: 15px;
+}
+
+/* Details card */
+.product-details {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: #fafaf7;
+    border-radius: 35px;
+
+    padding: 55px 60px;
+    box-sizing: border-box;
+
+    box-shadow: 0 15px 40px
+        rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Product name */
+.product-details h2 {
+    font-family: Georgia, serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #0d0d0d;
+
+    margin-bottom: 20px;
+}
+
+/* Description */
+.product-description {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    line-height: 1.7;
+    color: #060606;
+
+    margin-bottom: 25px;
+}
+
+/* Price */
+.product-price {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: #040001;
+
+    margin-bottom: 35px;
+}
+
+/* Add Cart button */
+.add-cart-btn {
+    width: 100%;
+    min-height: 55px;
+
+    background-color: #396be0 !important;
+    border: none !important;
+    border-radius: 30px;
+
+    color: #000000 !important;
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: 600;
+
+    margin-top: auto;
+}
+
+/* Hover effect */
+.add-cart-btn:hover {
+    background-color: #0a56da !important;
+    transform: translateY(-2px);
+    transition: 0.3s ease;
+}
+
+
+@media (max-width: 768px) {
+
+    .product-details-wrapper {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .product-image-container {
+        width: 100%;
+    }
+
+    .product-details-image {
+        height: 350px;
+    }
+
+    .product-details {
+        width: 100%;
+        padding: 30px 25px;
+        border-radius: 25px;
+    }
+
+    .product-details h2 {
+        font-size: 32px;
+    }
+
+    .product-description {
+        font-size: 17px;
+    }
+
+    .product-price {
+        font-size: 22px;
+    }
+
+    .add-cart-btn {
+        font-size: 18px;
+    }
+}

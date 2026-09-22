@@ -2,6 +2,7 @@ import { Button, Container, Row, Table, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {deleteProduct} from "../../redux/productSlice"
 
 import "./product.css";
 
@@ -70,7 +71,7 @@ function Listproduct() {
                                                 width: "180px",
                                                 height: "150px",
                                             }}
-                                            src={product.productPhoto}
+                                            src={product.productImage}
                                             alt={product.productName}
                                         />
                                     </td>

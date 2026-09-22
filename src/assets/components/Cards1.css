@@ -1,8 +1,39 @@
-.Container .col{
-    margin:20px;
+
+.product-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
 }
-.row h2{
-text-align: center;
-margin-top: 20px;
-margin-bottom: 20px;
+
+
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+
+.product-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+.product-card .card-text {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.product-card .btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+.product-card {
+    margin-bottom: 20px;
 }
